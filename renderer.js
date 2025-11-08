@@ -1211,6 +1211,7 @@ window.loadSettings = async function() {
         return {};
     }
 };
+
 // Initialize the application when the DOM is fully loaded
 async function initializeApp() {
     console.log('Wolo Inventory Management Started');
