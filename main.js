@@ -1590,6 +1590,11 @@ function setupErrorHandlers() {
 
 // Main application startup
 function initializeApp() {
+  if (mainWindow) {
+    console.warn('initializeApp() called but window already exists.');
+    return;
+  }
+  if (BrowserWindow.getAllWindows().length > 0) return; // <-- this guards against doubles
   console.log('App is ready, initializing database...');
   
   try {
@@ -1688,7 +1693,7 @@ app.on('window-all-closed', () => {
 });
 
 app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
+  if (process.platform === 'darwin' && BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
 });
