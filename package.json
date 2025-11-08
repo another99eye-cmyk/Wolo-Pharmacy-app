@@ -26,7 +26,8 @@
   "devDependencies": {
     "cross-env": "^10.1.0",
     "electron": "^28.1.0",
-    "electron-builder": "^24.9.1"
+    "electron-builder": "^24.9.1",
+    "electron-rebuild": "^3.2.9"
   },
   "build": {
     "appId": "com.wolo-pharmacy.app",

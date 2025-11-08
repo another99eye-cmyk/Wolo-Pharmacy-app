@@ -266,6 +266,7 @@
     
     // Function to initialize the application
     function initializeApp() {
+        if (BrowserWindow.getAllWindows().length > 0) return;
         console.log('jQuery version:', window.jQuery ? jQuery.fn.jquery : 'Not available');
         console.log('jQuery UI version:', window.jQuery && window.jQuery.ui ? jQuery.ui.version : 'Not loaded');
         
