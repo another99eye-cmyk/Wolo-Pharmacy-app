@@ -368,30 +368,7 @@ function registerIpcHandlers() {
     }
   });
 
-  ipcMain.handle('set-setting', async (event, { key, value }) => {
-    const db = new Database(path.join(app.getPath('userData'), 'wolo-inventory.db'));
-    try {
-      const now = new Date().toISOString();
-      
-      db.prepare(`
-        INSERT INTO settings (key, value, updated_at)
-        VALUES (?, ?, ?)
-        ON CONFLICT(key) DO UPDATE SET
-          value = excluded.value,
-          updated_at = excluded.updated_at
-      `).run(key, JSON.stringify(value), now);
-      
-      return { success: true };
-    } catch (error) {
-      console.error('Error saving setting:', error);
-      return { 
-        success: false, 
-        error: error.message || 'Failed to save setting' 
-      };
-    } finally {
-      if (db) db.close();
-    }
-  });
+  
 
   // Sales Handlers
   ipcMain.handle('get-sales-by-date-range', async (event, { startDate, endDate }) => {
@@ -1590,11 +1567,7 @@ function setupErrorHandlers() {
 
 // Main application startup
 function initializeApp() {
-  if (mainWindow) {
-    console.warn('initializeApp() called but window already exists.');
-    return;
-  }
-  if (BrowserWindow.getAllWindows().length > 0) return; // <-- this guards against doubles
+
   console.log('App is ready, initializing database...');
   
   try {
@@ -1689,11 +1662,5 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     if (db) db.close();
     app.quit();
-  }
-});
-
-app.on('activate', () => {
-  if (process.platform === 'darwin' && BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
   }
 });
