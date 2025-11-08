@@ -351,7 +351,6 @@ function registerIpcHandlers() {
           updated_at TEXT NOT NULL
         )
       `).run();
-      
       const setting = db.prepare('SELECT * FROM settings WHERE key = ?').get(key);
       return { 
         success: true, 
