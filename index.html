@@ -504,7 +504,7 @@
         };
 
         window.showLoading = function(show, key = 'default') {
-            const overlay = document.getElementById('loadingOverlay');
+            const overlay = document.getElementById('loading');
             if (overlay) {
                 overlay.style.display = show ? 'flex' : 'none';
             }
@@ -696,7 +696,7 @@
     </div>
 
     <!-- Loading Overlay -->
-    <div id="loading" class="loading-overlay" style="display: none;">
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
